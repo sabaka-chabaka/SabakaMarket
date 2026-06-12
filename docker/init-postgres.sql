@@ -1,0 +1,3 @@
+CREATE DATABASE sabakamarket_orders;
+CREATE DATABASE sabakamarket_payments;
+CREATE DATABASE sabakamarket_digitalassets;

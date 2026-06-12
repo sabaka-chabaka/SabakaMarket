@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  sabakamarket.postgres:
+    image: postgres:15-alpine
+    container_name: sabakamarket.postgres
+    environment:
+      POSTGRES_USER: sabaka_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sabaka_admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: sabakamarket.rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.mongodb:
+    image: mongo:latest
+    container_name: sabakamarket.mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo_admin
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.redis:
+    image: redis:7-alpine
+    container_name: sabakamarket.redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.orderservice.api:
+    image: sabakamarket-orderservice:latest
+    container_name: sabakamarket.orderservice.api
+    build:
+      context: .
+      dockerfile: docker/OrderService.Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=sabakamarket.postgres;Port=5432;Database=sabakamarket_orders;Username=sabaka_admin;Password=${DB_PASSWORD}
+      - MessageBroker__Host=sabakamarket.rabbitmq
+    depends_on:
+      sabakamarket.postgres:
+        condition: service_healthy
+      sabakamarket.rabbitmq:
+        condition: service_healthy
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.paymentservice.api:
+    image: sabakamarket-paymentservice:latest
+    container_name: sabakamarket.paymentservice.api
+    build:
+      context: .
+      dockerfile: docker/PaymentService.Dockerfile
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=sabakamarket.postgres;Port=5432;Database=sabakamarket_payments;Username=sabaka_admin;Password=${DB_PASSWORD}
+      - MessageBroker__Host=sabakamarket.rabbitmq
+    depends_on:
+      sabakamarket.postgres:
+        condition: service_healthy
+      sabakamarket.rabbitmq:
+        condition: service_healthy
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.digitalassetservice.api:
+    image: sabakamarket-digitalassetservice:latest
+    container_name: sabakamarket.digitalassetservice.api
+    build:
+      context: .
+      dockerfile: docker/DigitalAssetService.Dockerfile
+    ports:
+      - "5003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=sabakamarket.postgres;Port=5432;Database=sabakamarket_digitalassets;Username=sabaka_admin;Password=${DB_PASSWORD}
+      - MessageBroker__Host=sabakamarket.rabbitmq
+    depends_on:
+      sabakamarket.postgres:
+        condition: service_healthy
+      sabakamarket.rabbitmq:
+        condition: service_healthy
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.catalogservice.api:
+    image: sabakamarket-catalogservice:latest
+    container_name: sabakamarket.catalogservice.api
+    build:
+      context: .
+      dockerfile: docker/CatalogService.Dockerfile
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoSettings__ConnectionString=mongodb://mongo_admin:${DB_PASSWORD}@sabakamarket.mongodb:27017
+      - MongoSettings__DatabaseName=sabakamarket_catalog
+    depends_on:
+      sabakamarket.mongodb:
+        condition: service_healthy
+    networks:
+      - sabakamarket-network
+
+  sabakamarket.yarpgateway:
+    image: sabakamarket-gateway:latest
+    container_name: sabakamarket.yarpgateway
+    build:
+      context: .
+      dockerfile: docker/YarpGateway.Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - sabakamarket.orderservice.api
+      - sabakamarket.catalogservice.api
+    networks:
+      - sabakamarket-network
+
+networks:
+  sabakamarket-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  mongodb_data:
+  redis_data:
