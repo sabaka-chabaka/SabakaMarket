@@ -64,6 +64,26 @@ services:
     networks:
       - sabakamarket-network
 
+  sabakamarket.userservice.api:
+    image: sabakamarket-userservice:latest
+    container_name: sabakamarket.userservice.api
+    build:
+      context: .
+      dockerfile: docker/UserService.Dockerfile
+    ports:
+      - "5005:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=sabakamarket.postgres;Port=5432;Database=sabakamarket_users;Username=sabaka_admin;Password=${DB_PASSWORD}
+      - MessageBroker__Host=sabakamarket.rabbitmq
+    depends_on:
+      sabakamarket.postgres:
+        condition: service_healthy
+      sabakamarket.rabbitmq:
+        condition: service_healthy
+    networks:
+      - sabakamarket-network
+
   sabakamarket.orderservice.api:
     image: sabakamarket-orderservice:latest
     container_name: sabakamarket.orderservice.api
@@ -155,6 +175,7 @@ services:
     depends_on:
       - sabakamarket.orderservice.api
       - sabakamarket.catalogservice.api
+      - sabakamarket.userservice.api
     networks:
       - sabakamarket-network
 
