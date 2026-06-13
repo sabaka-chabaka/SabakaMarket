@@ -54,16 +54,6 @@ services:
     networks:
       - sabakamarket-network
 
-  sabakamarket.redis:
-    image: redis:7-alpine
-    container_name: sabakamarket.redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - sabakamarket-network
-
   sabakamarket.userservice.api:
     image: sabakamarket-userservice:latest
     container_name: sabakamarket.userservice.api
@@ -195,4 +185,3 @@ volumes:
   postgres_data:
   rabbitmq_data:
   mongodb_data:
-  redis_data:
