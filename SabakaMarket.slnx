@@ -3,4 +3,8 @@
   <Folder Name="/src/BuildingBlocks/">
     <Project Path="src/BuildingBlocks/SabakaMarket.Contracts/SabakaMarket.Contracts.csproj" />
   </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/CatalogService/">
+    <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.Domain/SabakaMarket.CatalogService.Domain.csproj" />
+  </Folder>
 </Solution>
