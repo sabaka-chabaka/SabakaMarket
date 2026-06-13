@@ -17,6 +17,8 @@
     <Project Path="src/Services/UserService/SabakaMarket.UserService.Infrastructure/SabakaMarket.UserService.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Services/OrderService/">
+    <Project Path="src/Services/OrderService/SabakaMarket.OrderService.API/SabakaMarket.OrderService.API.csproj" />
+    <Project Path="src/Services/OrderService/SabakaMarket.OrderService.Application/SabakaMarket.OrderService.Application.csproj" />
     <Project Path="src/Services/OrderService/SabakaMarket.OrderService.Domain/SabakaMarket.OrderService.Domain.csproj" />
     <Project Path="src/Services/OrderService/SabakaMarket.OrderService.Infrastructure/SabakaMarket.OrderService.Infrastructure.csproj" />
   </Folder>
