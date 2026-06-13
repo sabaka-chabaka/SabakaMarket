@@ -1,4 +1,4 @@
-namespace SabakaMarket.UserService.Infrastructure.Interfaces;
+namespace SabakaMarket.UserService.Infrastructure.Security;
 
 public interface IPasswordHasher
 {

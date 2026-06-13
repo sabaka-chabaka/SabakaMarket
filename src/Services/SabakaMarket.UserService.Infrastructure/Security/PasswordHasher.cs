@@ -1,5 +1,3 @@
-using SabakaMarket.UserService.Infrastructure.Interfaces;
-
 namespace SabakaMarket.UserService.Infrastructure.Security;
 
 public class PasswordHasher : IPasswordHasher

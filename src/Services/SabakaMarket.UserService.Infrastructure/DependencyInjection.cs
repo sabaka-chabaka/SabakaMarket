@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SabakaMarket.UserService.Domain.Repositories;
 using SabakaMarket.UserService.Infrastructure.Data;
-using SabakaMarket.UserService.Infrastructure.Interfaces;
 using SabakaMarket.UserService.Infrastructure.Repositories;
 using SabakaMarket.UserService.Infrastructure.Security;
 
