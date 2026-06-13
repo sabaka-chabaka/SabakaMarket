@@ -5,10 +5,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="MassTransit" Version="9.1.2" />
+    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\SabakaMarket.UserService.Domain\SabakaMarket.UserService.Domain.csproj" />
         <ProjectReference Include="..\SabakaMarket.UserService.Infrastructure\SabakaMarket.UserService.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\SabakaMarket.Contracts\SabakaMarket.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

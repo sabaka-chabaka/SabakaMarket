@@ -26,8 +26,16 @@ public class ProductsController(ICatalogService catalogService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ProductDto>> Create([FromQuery] Guid sellerId, [FromBody] CreateProductDto dto)
+    public async Task<ActionResult<ProductDto>> Create([FromBody] CreateProductDto dto)
     {
+        var nameIdentifier = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                             ?? User.FindFirst("sub")?.Value;
+
+        if (string.IsNullOrEmpty(nameIdentifier) || !Guid.TryParse(nameIdentifier, out var sellerId))
+        {
+            return Unauthorized(new { Message = "Не удалось определить пользователя из токена." });
+        }
+
         var result = await catalogService.CreateProductAsync(sellerId, dto);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }

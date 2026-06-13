@@ -76,6 +76,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=sabakamarket.postgres;Port=5432;Database=sabakamarket_users;Username=sabaka_admin;Password=${DB_PASSWORD}
       - MessageBroker__Host=sabakamarket.rabbitmq
+      - JwtSettings__SecretKey=${JWT_SECRET}
+      - JwtSettings__Issuer=SabakaMarket.Auth
+      - JwtSettings__Audience=SabakaMarket.Gateway
+      - JwtSettings__ExpiryMinutes=120
     depends_on:
       sabakamarket.postgres:
         condition: service_healthy
@@ -172,10 +176,14 @@ services:
       - "5000:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - JwtSettings__SecretKey=${JWT_SECRET}
     depends_on:
-      - sabakamarket.orderservice.api
-      - sabakamarket.catalogservice.api
-      - sabakamarket.userservice.api
+      sabakamarket.userservice.api:
+        condition: service_started
+      sabakamarket.orderservice.api:
+        condition: service_started
+      sabakamarket.catalogservice.api:
+        condition: service_started
     networks:
       - sabakamarket-network
 
