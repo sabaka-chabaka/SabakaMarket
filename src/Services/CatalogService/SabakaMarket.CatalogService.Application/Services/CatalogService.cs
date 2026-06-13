@@ -10,14 +10,14 @@ public class CatalogService(IProductRepository products) : ICatalogService
     {
         var active = await products.GetAllActiveAsync();
 
-        return active.Select(product => new ProductDto(product.Id, product.Name, product.Description, product.Price, product.Quantity, product.CreatedAt, product.IsActive)).ToList();
+        return active.Select(product => new ProductDto(product.Id, product.SellerId, product.Name, product.Description, product.Price, product.Quantity, product.CreatedAt, product.IsActive)).ToList();
     }
 
     public async Task<ProductDto?> GetProductByIdAsync(Guid id)
     {
         var product = await products.GetByIdAsync(id);
         
-        return product == null ? null : new ProductDto(product.Id, product.Name, product.Description, product.Price, product.Quantity, product.CreatedAt, product.IsActive);
+        return product == null ? null : new ProductDto(product.Id, product.SellerId, product.Name, product.Description, product.Price, product.Quantity, product.CreatedAt, product.IsActive);
     }
 
     public async Task<ProductDto> CreateProductAsync(Guid sellerId, CreateProductDto product)
@@ -26,7 +26,7 @@ public class CatalogService(IProductRepository products) : ICatalogService
         
         await products.CreateAsync(prodEntity);
 
-        return new ProductDto(prodEntity.Id, prodEntity.Name, prodEntity.Description, prodEntity.Price,
+        return new ProductDto(prodEntity.Id, prodEntity.SellerId, prodEntity.Name, prodEntity.Description, prodEntity.Price,
             prodEntity.Quantity, prodEntity.CreatedAt, prodEntity.IsActive);
     }
 

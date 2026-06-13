@@ -40,6 +40,7 @@ public class Product
     public void DecreaseQuantity(int quantity = 1)
     {
         if (Quantity <= 0) throw new InvalidOperationException("Asset is out of stock!");
+        if (Quantity < quantity) throw new InvalidOperationException("Not enough assets in stock!");
         
         Quantity -= quantity;
         IsActive = Quantity > 0;
