@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/src/Services/" />
   <Folder Name="/src/Services/CatalogService/">
+    <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.API/SabakaMarket.CatalogService.API.csproj" />
     <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.Application/SabakaMarket.CatalogService.Application.csproj" />
     <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.Domain/SabakaMarket.CatalogService.Domain.csproj" />
     <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.Infrastructure/SabakaMarket.CatalogService.Infrastructure.csproj" />
