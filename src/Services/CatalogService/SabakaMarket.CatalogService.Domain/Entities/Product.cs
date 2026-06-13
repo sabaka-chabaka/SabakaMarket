@@ -37,11 +37,11 @@ public class Product
         IsActive = Quantity > 0;
     }
 
-    public void DecreaseQuantity()
+    public void DecreaseQuantity(int quantity = 1)
     {
         if (Quantity <= 0) throw new InvalidOperationException("Asset is out of stock!");
         
-        Quantity--;
+        Quantity -= quantity;
         IsActive = Quantity > 0;
     }
 }
