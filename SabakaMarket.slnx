@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/SabakaMarket.Contracts/SabakaMarket.Contracts.csproj" />
+  </Folder>
+</Solution>
