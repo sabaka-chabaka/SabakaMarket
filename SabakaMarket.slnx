@@ -11,8 +11,9 @@
     <Project Path="src/Services/CatalogService/SabakaMarket.CatalogService.Infrastructure/SabakaMarket.CatalogService.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Services/UserService/">
-    <Project Path="src/Services/SabakaMarket.UserService.Application/SabakaMarket.UserService.Application.csproj" />
-    <Project Path="src/Services/SabakaMarket.UserService.Domain/SabakaMarket.UserService.Domain.csproj" />
-    <Project Path="src/Services/SabakaMarket.UserService.Infrastructure/SabakaMarket.UserService.Infrastructure.csproj" />
+    <Project Path="src/Services/UserService/SabakaMarket.UserService.API/SabakaMarket.UserService.API.csproj" />
+    <Project Path="src/Services/UserService/SabakaMarket.UserService.Application/SabakaMarket.UserService.Application.csproj" />
+    <Project Path="src/Services/UserService/SabakaMarket.UserService.Domain/SabakaMarket.UserService.Domain.csproj" />
+    <Project Path="src/Services/UserService/SabakaMarket.UserService.Infrastructure/SabakaMarket.UserService.Infrastructure.csproj" />
   </Folder>
 </Solution>
