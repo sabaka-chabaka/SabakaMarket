@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SabakaMarket.PaymentService.Application\SabakaMarket.PaymentService.Application.csproj" />
+
+        <ProjectReference Include="..\SabakaMarket.PaymentService.Infrastructure\SabakaMarket.PaymentService.Infrastructure.csproj" />
+    </ItemGroup>
+</Project>
