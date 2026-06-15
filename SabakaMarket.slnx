@@ -24,5 +24,6 @@
   </Folder>
   <Folder Name="/src/Services/DigitalAssetService/">
     <Project Path="src/Services/DigitalAssetService/SabakaMarket.DigitalAssetService.Domain/SabakaMarket.DigitalAssetService.Domain.csproj" />
+    <Project Path="src/Services/DigitalAssetService/SabakaMarket.DigitalAssetService.Infrastructure/SabakaMarket.DigitalAssetService.Infrastructure.csproj" />
   </Folder>
 </Solution>
