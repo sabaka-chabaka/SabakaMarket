@@ -30,6 +30,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<OrderCreatedConsumer>();
+    x.AddConsumer<PaymentConfirmedAssetConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

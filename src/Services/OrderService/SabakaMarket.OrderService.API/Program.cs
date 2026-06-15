@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using SabakaMarket.OrderService.Application;
 using SabakaMarket.OrderService.Infrastructure;
 using System.Text;
+using SabakaMarket.OrderService.Application.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,8 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<PaymentConfirmedConsumer>();
+    
     x.UsingRabbitMq((context, cfg) =>
     {
         var rabbitHost = builder.Configuration["MessageBroker:Host"] ?? "localhost";

@@ -1,4 +1,4 @@
-CREATE DATABASE sabakamarket_orders;
-CREATE DATABASE sabakamarket_payments;
-CREATE DATABASE sabakamarket_digitalassets;
-CREATE DATABASE sabakamarket_users;
+CREATE DATABASE SabakaMarket_Orders;
+CREATE DATABASE SabakaMarket_Payments;
+CREATE DATABASE SabakaMarket_Digitalassets;
+CREATE DATABASE SabakaMarket_Users;
