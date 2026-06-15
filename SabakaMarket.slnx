@@ -33,6 +33,8 @@
     <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Application/SabakaMarket.PaymentService.Application.csproj" />
     <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Domain/SabakaMarket.PaymentService.Domain.csproj" />
     <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Infrastructure/SabakaMarket.PaymentService.Infrastructure.csproj" />
-    
+  </Folder>
+  <Folder Name="/src/Gateway/">
+    <Project Path="src/Gateway/SabakaMarket.YarpGateway/SabakaMarket.YarpGateway.csproj" />
   </Folder>
 </Solution>
