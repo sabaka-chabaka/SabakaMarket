@@ -30,6 +30,7 @@
   </Folder>
   <Folder Name="/src/Services/PaymentService/">
     <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Domain/SabakaMarket.PaymentService.Domain.csproj" />
+    <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Infrastructure/SabakaMarket.PaymentService.Infrastructure.csproj" />
     
   </Folder>
 </Solution>
