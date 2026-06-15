@@ -28,4 +28,8 @@
     <Project Path="src/Services/DigitalAssetService/SabakaMarket.DigitalAssetService.Domain/SabakaMarket.DigitalAssetService.Domain.csproj" />
     <Project Path="src/Services/DigitalAssetService/SabakaMarket.DigitalAssetService.Infrastructure/SabakaMarket.DigitalAssetService.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Services/PaymentService/">
+    <Project Path="src/Services/PaymentService/SabakaMarket.PaymentService.Domain/SabakaMarket.PaymentService.Domain.csproj" />
+    
+  </Folder>
 </Solution>
